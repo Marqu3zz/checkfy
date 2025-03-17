@@ -5,6 +5,10 @@ import {MatIcon} from '@angular/material/icon';
 import {MatMiniFabButton} from '@angular/material/button';
 import {UserService} from '../../../shared/services/user.service';
 import {MatTooltip} from '@angular/material/tooltip';
+import {MatInput} from '@angular/material/input';
+import {MatCard} from '@angular/material/card';
+import {Router} from '@angular/router';
+
 @Component({
     selector: 'app-user-list',
     standalone: true,
@@ -64,8 +68,3 @@ export class UserListComponent {
         return str.normalize("NFD").replace(/[\u0300-\u036f]/g, "");
     }
 }
-import {MatInput} from '@angular/material/input';
-import {MatCard} from "@angular/material/card";
-import {Router} from "@angular/router";
-
-import {LoadingService} from "../../../shared/libs/lib-angular/services/loading.service";
