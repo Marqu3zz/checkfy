@@ -1,0 +1,18 @@
+<mat-toolbar class="relative h-14 gap-x-2 mat-elevation-z2 justify-center">
+  <img ngSrc="/logos/checkFy_name.png" width="90" height="90" alt="Ícone" class="absolute left-4" priority>
+
+  <button [routerLink]="['/admin/customers']" class="button-hover" mat-button routerLinkActive="active">
+    Clientes
+  </button>
+
+  <button [routerLink]="['/admin/users']" class="button-hover" mat-button routerLinkActive="active">
+    Usuários
+  </button>
+
+  <div class="absolute right-4">
+    <span class="font-semibold text-sm">{{user.name}}</span>
+    <button mat-icon-button (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon>
+    </button>
+  </div>
+</mat-toolbar>

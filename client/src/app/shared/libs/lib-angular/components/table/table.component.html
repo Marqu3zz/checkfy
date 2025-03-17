@@ -1,0 +1,83 @@
+<div class="flex flex-col relative h-full w-full min-h-12 bg-white">
+    <div class="flex flex-col flex-grow overflow-auto">
+        <table mat-table matSort [dataSource]="dataSource" class="z-0">
+            @for (column of columns; track column.key) {
+                <ng-container [matColumnDef]="column.key">
+                    <th mat-header-cell mat-sort-header *matHeaderCellDef [class]="column.align"> {{ column.title }}</th>
+                    <td mat-cell *matCellDef="let element" [class]="column.align">
+                        @if (column.component) {
+                            <div class="flex {{column.align}}">
+                                <ng-container *ngComponentOutlet="column.component;
+                                                                  inputs: {value: element, extraData: componentExtraData}">
+                                </ng-container>
+                            </div>
+                        } @else if (column.enum) {
+                            {{ column.enum.values[getCellData(element, column.key)] ?? column.enum.default || '-' }}
+                        } @else {
+                            {{ getCellData(element, column.key, column.type) }}
+                        }
+                    </td>
+                </ng-container>
+            }
+
+            <ng-container matColumnDef="_actions">
+                <th *matHeaderCellDef mat-header-cell class="center"></th>
+                <td *matCellDef="let row" mat-cell [class]="getActionsMinWidth()">
+                    @for (action of actions; track action) {
+                        <button mat-icon-button
+                                (click)="onActionClick(action, row)"
+                                class="float-right text-primary"
+                                [matTooltip]="action === 'edit' ? 'Editar' : action === 'delete' ? 'Deletar' : 'Visualizar'"
+                                matTooltipPosition="left">
+                            <mat-icon>{{ action === "visualize" ? "visibility" : action }}</mat-icon>
+                        </button>
+                    }
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns" [ngStyle]="{'background-color': getBackgroundColor(row)}" (click)="onRowClick(row)"></tr>
+
+            @if (emptyMessage) {
+                <tr class="mat-row" *matNoDataRow>
+                    <td [attr.colspan]="columns.length" class="empty">{{ emptyMessage }}</td>
+                </tr>
+            }
+        </table>
+
+        @if (status !== "LOADED") {
+            <div class="absolute flex top-0 left-0 bottom-0 right-0 opaque">
+                @if (status === "LOADING") {
+                    <span class="m-auto font-bold text-primary">Buscando registros...</span>
+                } @else {
+                    <span class="m-auto font-bold text-error">Erro ao carregar os registros.</span>
+                }
+            </div>
+        }
+    </div>
+
+    @if (status !== "LOADED") {
+        <mat-progress-bar [color]="(status === 'LOADING' ? 'primary' : 'warn')"
+                          [mode]="(status === 'LOADING' ? 'indeterminate' : 'determinate')"
+                          [value]="100">
+        </mat-progress-bar>
+    }
+
+    @if (pagination === "server-side") {
+        <mat-paginator (page)="onPageChange($event)"
+                       [disabled]="status !== 'LOADED'"
+                       [length]="paginator.length"
+                       [pageIndex]="paginator.pageIndex"
+                       [pageSizeOptions]="pageSizeOptions"
+                       [pageSize]="paginator.pageSize"
+                       class="p-1 z-10">
+        </mat-paginator>
+    } @else if (pagination === "client-side") {
+        <mat-paginator [length]="paginator.length"
+                       [pageSizeOptions]="pageSizeOptions"
+                       [pageSize]="paginator.pageSize"
+                       class="p-1 z-10">
+        </mat-paginator>
+    }
+</div>
+

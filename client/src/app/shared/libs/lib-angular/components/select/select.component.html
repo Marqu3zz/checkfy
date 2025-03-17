@@ -1,0 +1,95 @@
+<mat-form-field appearance="outline" class="sm:col-span-1 w-full m-0" subscriptSizing="dynamic">
+    <mat-label>{{ label }}</mat-label>
+
+    @if (control) {
+        <mat-select [formControl]="control" [placeholder]="placeholder" [multiple]="multiple">
+            @if (withFilter) {
+                @if (filteredOptions$ | async; as options) {
+                    <ng-container>
+                        <mat-option>
+                            <ngx-mat-select-search [formControl]="filter"
+                                                   [placeholderLabel]="searchPlaceholder"
+                                                   noEntriesFoundLabel="Nenhum registro encontrado.">
+                            </ngx-mat-select-search>
+                        </mat-option>
+
+                        @if (showNullOption) {
+                            <mat-option [value]="null">(Vazio)</mat-option>
+                        }
+
+                        @for (option of options; track option) {
+                            <mat-option [value]="(valueField ? option[valueField] : option)"
+                                        (onSelectionChange)="onSelectionChange($event, option)">
+                                {{ option[optionsField] }}
+                            </mat-option>
+                        }
+                    </ng-container>
+                } @else {
+                    <ng-template>
+                        <mat-option (click)="$event.stopPropagation()">
+                            <mat-progress-bar mode="buffer"></mat-progress-bar>
+                        </mat-option>
+                    </ng-template>
+                }
+            } @else {
+                @if (options$ | async; as options) {
+                    @if (showNullOption) {
+                        <mat-option [value]="null">(Vazio)</mat-option>
+                    }
+
+                    @for (option of options; track option) {
+                        <mat-option [value]="(valueField ? option[valueField] : option)"
+                                    (onSelectionChange)="onSelectionChange($event, option)">
+                            {{ option[optionsField] }}
+                        </mat-option>
+                    }
+                }
+            }
+        </mat-select>
+    } @else {
+        <mat-select [(ngModel)]="model" [placeholder]="placeholder" [multiple]="multiple">
+            @if (withFilter) {
+                @if (filteredOptions$ | async; as options) {
+                    <ng-container>
+                        <mat-option>
+                            <ngx-mat-select-search [formControl]="filter"
+                                                   [placeholderLabel]="searchPlaceholder"
+                                                   noEntriesFoundLabel="Nenhum registro encontrado.">
+                            </ngx-mat-select-search>
+                        </mat-option>
+
+                        @if (showNullOption) {
+                            <mat-option [value]="null">(Vazio)</mat-option>
+                        }
+
+                        @for (option of options; track option) {
+                            <mat-option [value]="(valueField ? option[valueField] : option)"
+                                        (onSelectionChange)="onSelectionChange($event, option)">
+                                {{ option[optionsField] }}
+                            </mat-option>
+                        }
+                    </ng-container>
+                } @else {
+                    <ng-template>
+                        <mat-option (click)="$event.stopPropagation()">
+                            <mat-progress-bar mode="buffer"></mat-progress-bar>
+                        </mat-option>
+                    </ng-template>
+                }
+            } @else {
+                @if (options$ | async; as options) {
+                    @if (showNullOption) {
+                        <mat-option [value]="null">(Vazio)</mat-option>
+                    }
+
+                    @for (option of options; track option) {
+                        <mat-option [value]="(valueField ? option[valueField] : option)"
+                                    (onSelectionChange)="onSelectionChange($event, option)">
+                            {{ option[optionsField] }}
+                        </mat-option>
+                    }
+                }
+            }
+        </mat-select>
+    }
+</mat-form-field>

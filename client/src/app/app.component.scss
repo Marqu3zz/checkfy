@@ -1,0 +1,22 @@
+@use '../theme';
+
+.line {
+  height: 3px;
+  background-color: theme.$primary-color;
+}
+
+.title-background {
+  width: 150px;
+  height: 25px;
+  background-color: theme.$primary-color;
+  border-radius: 0 0 10px 10px;
+  margin: 0 auto;
+  display: flex;
+}
+
+.title {
+  margin: auto;
+  padding-bottom: 3px;
+  color: white;
+  font-weight: 300;
+}

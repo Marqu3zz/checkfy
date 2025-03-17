@@ -1,0 +1,41 @@
+<div class="flex flex-col">
+    <div class="flex justify-center p-4" mat-dialog-title>
+        <h2 class="primary-text flex justify-center items-center">
+            @switch (icon) {
+                @case ("help") {
+                    <mat-icon class="text-info mr-2">help</mat-icon>
+                }
+                @case ("error") {
+                    <mat-icon class="text-error mr-2">error</mat-icon>
+                }
+                @case ("warning") {
+                    <mat-icon class="text-warning mr-2">warning</mat-icon>
+                }
+                @case ("info") {
+                    <mat-icon class="text-info mr-2">info</mat-icon>
+                }
+            }
+
+            {{ title }}
+        </h2>
+    </div>
+
+    <div class="text-black text-center w-full" mat-dialog-content>
+        <p class="whitespace-pre-line">{{ content }}</p>
+    </div>
+
+    <div class="flex justify-end mt-4" mat-dialog-actions>
+        @if (buttons === "ok") {
+            <button mat-flat-button color="primary" (click)="dialogRef.close(true)">
+                Ok
+            </button>
+        } @else {
+            <button mat-stroked-button color="primary" (click)="dialogRef.close(false)">
+                {{ buttons === "okCancel" ? "Cancelar" : "Não" }}
+            </button>
+            <button mat-flat-button color="primary" (click)="dialogRef.close(true)">
+                {{ buttons === "okCancel" ? "Ok" : "Sim" }}
+            </button>
+        }
+    </div>
+</div>

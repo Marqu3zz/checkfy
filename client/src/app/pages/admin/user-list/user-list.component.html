@@ -1,0 +1,30 @@
+<div class="p-8 fill">
+    <div class="flex flex-col fill">
+        <div class="flex items-center justify-between">
+            <div class="flex items-center">
+                <h1>Usuários</h1>
+                <button mat-mini-fab
+                          matTooltip="Adicionar"
+                          matTooltipPosition="right"
+                          class="ml-4"
+                          (click)="add()">
+                    <mat-icon>add</mat-icon>
+                </button>
+            </div>
+            <div class="flex items-center w-80 search-container mat-elevation-z5">
+                <mat-icon class="search-icon">search</mat-icon>
+                <input (input)="filter($event)"
+                     class="search-input"
+                     placeholder="Pesquisar..."
+                     matInput>
+            </div>
+        </div>
+
+        <mat-card class="overflow-hidden fill mt-8">
+            <limber-table [columns]="columns"
+                          [actions]="['edit']"
+                          [data]="filteredData">
+            </limber-table>
+        </mat-card>
+    </div>
+</div>

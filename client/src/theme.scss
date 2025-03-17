@@ -1,0 +1,326 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+
+@use 'sass:map';
+@use '../node_modules/@angular/material/index' as mat;
+
+@include mat.core();
+
+// ------------------------------------------------------------------------------------------------------------------ //
+// ---------------------------------------------------- Colors ------------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------ //
+
+$primary-color: #1155CC;
+$secondary-color: #3260b2;
+$tertiary-color: #4d5d8b;
+
+$warn-color: #ff9800;
+$error-color: #f44336;
+$success-color: #4caf50;
+$info-color: #2196f3;
+
+// ------------------------------------------------------------------------------------------------------------------ //
+// --------------------------------------------------- Palettes ----------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------ //
+
+$_palettes: (
+  primary: (
+    0: #000000,
+    10: #0d2b5f,
+    20: #103c88,
+    25: #114796,
+    30: #1151a5,
+    35: #1155b8,
+    40: #1155CC,
+    50: #3a77d4,
+    60: #6498dc,
+    70: #8db9e4,
+    80: #b5d9ed,
+    90: #dceafd,
+    95: #f1f5fe,
+    98: #f9fbff,
+    99: #fcfdff,
+    100: #ffffff
+  ),
+  secondary: (
+    0: #000000,
+    10: #071321,
+    20: #0e2642,
+    25: #183860,
+    30: #234a7e,
+    35: #2b5696,
+    40: #3260b2,
+    50: #5077c1,
+    60: #6d8fd0,
+    70: #8aa7df,
+    80: #a7bfea,
+    90: #c4d7f3,
+    95: #dbe8fa,
+    98: #eef4fc,
+    99: #f5f9fe,
+    100: #ffffff,
+  ),
+  tertiary: (
+    0: #000000,
+    10: #041944,
+    20: #1d2f5a,
+    25: #293a65,
+    30: #354572,
+    35: #41517e,
+    40: #4d5d8b,
+    50: #6576a5,
+    60: #7f8fc1,
+    70: #99aadd,
+    80: #b5c5fa,
+    90: #dae2ff,
+    95: #eef0ff,
+    98: #faf8ff,
+    99: #fefbff,
+    100: #ffffff,
+  ),
+  neutral: (
+    0: #000000,
+    10: #1a1a1a,
+    20: #333333,
+    25: #404040,
+    30: #4d4d4d,
+    35: #595959,
+    40: #696969,
+    50: #7f7f7f,
+    60: #999999,
+    70: #b3b3b3,
+    80: #cccccc,
+    90: #e5e5e5,
+    95: #f2f2f2,
+    98: #fafafa,
+    99: #fcfcfc,
+    100: #ffffff,
+    4: #0a0a0a,
+    6: #0f0f0f,
+    12: #1f1f1f,
+    17: #2b2b2b,
+    22: #383838,
+    24: #3d3d3d,
+    87: #dadada,
+    92: #ededed,
+    94: #f0f0f0,
+    96: #f7f7f7,
+  ),
+  neutral-variant: (
+    0: #000000,
+    10: #171b27,
+    20: #2c303d,
+    25: #373b48,
+    30: #434654,
+    35: #4e5260,
+    40: #5a5e6c,
+    50: #737685,
+    60: #8d909f,
+    70: #a7aaba,
+    80: #c3c6d6,
+    90: #dfe2f2,
+    95: #eef0ff,
+    98: #faf8ff,
+    99: #fefbff,
+    100: #ffffff,
+  ),
+  error: (
+    0: #000000,
+    10: #410002,
+    20: #690005,
+    25: #7e0007,
+    30: #93000a,
+    35: #a80710,
+    40: #ba1a1a,
+    50: #de3730,
+    60: #ff5449,
+    70: #ff897d,
+    80: #ffb4ab,
+    90: #ffdad6,
+    95: #ffedea,
+    98: #fff8f7,
+    99: #fffbff,
+    100: #ffffff,
+  ),
+);
+
+$_rest: (
+  secondary: map.get($_palettes, secondary),
+  neutral: map.get($_palettes, neutral),
+  neutral-variant: map.get($_palettes, neutral-variant),
+  error: map.get($_palettes, error),
+);
+$_primary: map.merge(map.get($_palettes, primary), $_rest);
+$_tertiary: map.merge(map.get($_palettes, tertiary), $_rest);
+
+$light-theme: mat.define-theme((
+  color: (
+    theme-type: light,
+    primary: $_primary,
+    tertiary: $_tertiary,
+  ),
+  typography: (
+    plain-family: "Poppins",
+    brand-family: "Poppins",
+  )
+));
+
+// ------------------------------------------------------------------------------------------------------------------ //
+// -------------------------------------------------- Main Theme ---------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------ //
+
+:root {
+  @include mat.all-component-themes($light-theme);
+}
+
+// ------------------------------------------------------------------------------------------------------------------ //
+// ---------------------------------------------- Secondary Variants ------------------------------------------------ //
+// ------------------------------------------------------------------------------------------------------------------ //
+
+.secondary-badge {
+  @include mat.badge-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-button {
+  @include mat.button-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-checkbox {
+  @include mat.checkbox-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-chips {
+  @include mat.chips-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-datepicker {
+  @include mat.datepicker-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-fab {
+  @include mat.fab-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-form-field {
+  @include mat.form-field-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-icon-color {
+  @include mat.icon-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-option {
+  @include mat.option-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-progress-bar {
+  @include mat.progress-bar-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-progress-spinner {
+  @include mat.progress-spinner-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-pseudo-checkbox {
+  @include mat.pseudo-checkbox-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-radio {
+  @include mat.radio-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-select {
+  @include mat.select-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-slide-toggle {
+  @include mat.slide-toggle-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-slider {
+  @include mat.slider-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-stepper {
+  @include mat.stepper-color($light-theme, $color-variant: secondary);
+}
+
+.secondary-tabs {
+  @include mat.tabs-color($light-theme, $color-variant: secondary);
+}
+
+// ------------------------------------------------------------------------------------------------------------------ //
+// ---------------------------------------------- Tertiary Variants ------------------------------------------------- //
+// ------------------------------------------------------------------------------------------------------------------ //
+
+.tertiary-badge {
+  @include mat.badge-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-button {
+  @include mat.button-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-checkbox {
+  @include mat.checkbox-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-chips {
+  @include mat.chips-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-datepicker {
+  @include mat.datepicker-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-fab {
+  @include mat.fab-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-form-field {
+  @include mat.form-field-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-icon-color {
+  @include mat.icon-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-option {
+  @include mat.option-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-progress-bar {
+  @include mat.progress-bar-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-progress-spinner {
+  @include mat.progress-spinner-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-pseudo-checkbox {
+  @include mat.pseudo-checkbox-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-radio {
+  @include mat.radio-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-select {
+  @include mat.select-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-slide-toggle {
+  @include mat.slide-toggle-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-slider {
+  @include mat.slider-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-stepper {
+  @include mat.stepper-color($light-theme, $color-variant: tertiary);
+}
+
+.tertiary-tabs {
+  @include mat.tabs-color($light-theme, $color-variant: tertiary);
+}

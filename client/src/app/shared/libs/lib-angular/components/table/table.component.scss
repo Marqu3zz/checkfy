@@ -1,0 +1,77 @@
+.opaque {
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.left {
+    text-align: left;
+    justify-content: left;
+}
+
+:host ::ng-deep .left > .mat-sort-header-container {
+    display: flex;
+    justify-content: left;
+}
+
+.center {
+    text-align: center;
+    justify-content: center;
+}
+
+:host ::ng-deep .center > .mat-sort-header-container {
+    display: flex;
+    justify-content: center;
+
+    .mat-sort-header-content {
+        margin-left: 16px;
+    }
+}
+
+.right {
+    text-align: right;
+    justify-content: right;
+}
+
+:host ::ng-deep .right > .mat-sort-header-container {
+    display: flex;
+    justify-content: right;
+    flex-direction: row-reverse;
+
+    .mat-sort-header-content {
+        margin-left: 6px;
+    }
+}
+
+.actions-2 {
+    min-width: 125px;
+}
+
+.actions-3 {
+    min-width: 175px;
+}
+
+.empty {
+    padding: 1rem;
+    color: #E0E0E0;
+    background-color: white;
+}
+
+mat-paginator {
+    background-color: #FAFAFA;
+    border-top: 1px solid #E0E0E0;
+}
+
+table {
+    background-color: #ffffff;
+}
+
+table tr {
+    background-color: #FAFAFA;
+}
+
+table th {
+    border-bottom-color: #E0E0E0;
+}
+
+table .mat-mdc-cell {
+    border-bottom-color: #E0E0E0;
+}

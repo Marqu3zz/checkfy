@@ -1,0 +1,20 @@
+<div class="fullscreen flex flex-col items-center justify-center m-auto mat-primary">
+  <mat-card [formGroup]="form" class="grid sm:grid-cols-4 gap-2 p-6 mat-primary max-w-[400px]">
+    <h1 class="mb-2 text-center">Login</h1>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>E-mail</mat-label>
+      <input matInput formControlName="email">
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" subscriptSizing="dynamic">
+      <mat-label>Senha</mat-label>
+      <input matInput formControlName="password" [type]="showPassword ? 'text' : 'password'">
+      <button mat-icon-button matSuffix (click)="togglePasswordVisibility()">
+        <mat-icon>{{ showPassword ? 'visibility' : 'visibility_off' }}</mat-icon>
+      </button>
+    </mat-form-field>
+
+    <button mat-stroked-button (click)="login()" class="mt-5">Entrar</button>
+  </mat-card>
+</div>

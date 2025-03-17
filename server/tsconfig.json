@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "allowJs": false,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "declaration": false,
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noLib": false,
+    "outDir": "./dist",
+    "pretty": true,
+    "removeComments": true,
+    "skipLibCheck": true,
+    "sourceMap": true,
+    "strict": true,
+    "strictNullChecks": false,
+    "target": "ESNext",
+    "types": [
+      "node"
+    ]
+  },
+  "include": [
+    "./**/*"
+  ],
+  "exclude": [
+    "@types",
+    "dist",
+    "node_modules",
+    "**/*.spec.ts"
+  ]
+}
