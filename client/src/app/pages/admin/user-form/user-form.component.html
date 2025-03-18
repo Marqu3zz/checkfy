@@ -8,6 +8,14 @@
           <input matInput formControlName="name">
         </mat-form-field>
 
+        <mat-form-field class="sm:col-span-1">
+          <mat-label>Permissão</mat-label>
+          <mat-select formControlName="permission">
+            <mat-option value="ADMIN">Administrador</mat-option>
+            <mat-option value="OPERATION">Operador</mat-option>
+          </mat-select>
+        </mat-form-field>
+
         <mat-form-field class="sm:col-span-3 w-full">
           <mat-label>E-mail</mat-label>
           <input matInput formControlName="email">
@@ -19,7 +27,8 @@
         </mat-form-field>
       </div>
 
-      <button mat-button>Enviar</button>
+      <button mat-button (click)="save()">Salvar</button>
+
     </form>
 </div>
 

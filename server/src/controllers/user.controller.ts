@@ -5,7 +5,7 @@ import {IUser} from "../models/user.model";
 export class UserController {
     public static async getAll() {
         try {
-            const result = await pool.query(`SELECT * FROM users`);
+            const result = await pool.query(`SELECT id, name, email, permission, active FROM users`);
 
             return result.rows;
         }catch (err) {
@@ -15,7 +15,7 @@ export class UserController {
 
     public static async getById(id: number) {
         try {
-            const result = await pool.query(`SELECT * FROM users WHERE id=${id}`);
+            const result = await pool.query(`SELECT id, name, email, permission, active FROM users WHERE id=${id}`);
 
             return result.rows[0];
         } catch (err) {
@@ -28,8 +28,22 @@ export class UserController {
 
         try {
             const result = await pool.query(
-                `INSERT INTO users(name, email, password) VALUES($1, $2, $3) RETURNING *;`,
-                [body.name, body.email, body.password]
+                `INSERT INTO users(
+                  name,
+                  email,
+                  password,
+                  permission,
+                  active
+                ) VALUES (
+                         $1,
+                         $2,
+                         $3,
+                         $4,
+                         $5
+                )
+                RETURNING *;`,
+
+                [body.name, body.email, body.password, body.permission, body.active]
             );
 
             return result.rows[0];
@@ -45,12 +59,13 @@ export class UserController {
 
         try {
             const result = await pool.query(
-                `UPDATE users 
-                 SET name =  COALESCE($1, name), 
-                     email = COALESCE($2, email), 
+                `UPDATE users
+                 SET name =  COALESCE($1, name),
+                     email = COALESCE($2, email),
                      password = COALESCE($3, password)
                  WHERE id = $4
                  RETURNING *`,
+
                 [body.name, body.email, body.password, id]
             );
 
@@ -62,7 +77,7 @@ export class UserController {
 
     public static async delete(id: number) {
         try {
-            return await pool.query(`DELETE FROM users WHERE id = $1`, [id]);
+            return await pool.query(`DELETE  FROM users WHERE id = $1`, [id]);
         } catch (err) {
             throw new Error(`Erro ao deletar usuário: ${err}`)
         }

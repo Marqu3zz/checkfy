@@ -8,6 +8,7 @@ import {MatTooltip} from '@angular/material/tooltip';
 import {MatInput} from '@angular/material/input';
 import {MatCard} from '@angular/material/card';
 import {Router} from '@angular/router';
+import {ActiveComponent} from '../../../shared/components/user-list-table/active/active.component';
 
 @Component({
     selector: 'app-user-list',
@@ -36,6 +37,15 @@ export class UserListComponent {
         {
             key: "email",
             title: "E-mail",
+        },
+        {
+            key: "permission",
+            title: "Permissão",
+        },
+        {
+            key: "active",
+            title: "Ativo",
+            component: ActiveComponent
         }
     ];
 
@@ -54,6 +64,10 @@ export class UserListComponent {
 
     async add() {
         await this.router.navigate(['/admin/users', 'new']);
+    }
+
+    async edit(userId: string) {
+        await this.router.navigate(['/admin/users', userId]);
     }
 
     filter(event: Event) {

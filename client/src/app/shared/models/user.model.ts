@@ -3,5 +3,6 @@ export interface IUser {
   email: string;
   password: string;
   name: string;
-  active: boolean
+  permission: string;
+  active: boolean;
 }

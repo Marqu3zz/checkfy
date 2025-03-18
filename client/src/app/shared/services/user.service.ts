@@ -29,4 +29,12 @@ export class UserService {
     public getById(id: string) {
       return this.http.get<IUser>(`api/users/${id}`);
     }
+
+    public createOrUpdate(body: IUser) {
+      if (body.id) {
+        return this.http.put<IUser>(`api/users/${body.id}`, body);
+      } else {
+        return this.http.post<IUser>(`api/users/`, body);
+      }
+    }
 }

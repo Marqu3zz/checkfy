@@ -22,6 +22,7 @@
 
         <mat-card class="overflow-hidden fill mt-8">
             <limber-table [columns]="columns"
+                          (actionClick)="edit($event.row.id)"
                           [actions]="['edit']"
                           [data]="filteredData">
             </limber-table>
