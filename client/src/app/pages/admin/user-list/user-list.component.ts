@@ -9,6 +9,7 @@ import {MatInput} from '@angular/material/input';
 import {MatCard} from '@angular/material/card';
 import {Router} from '@angular/router';
 import {ActiveComponent} from '../../../shared/components/user-list-table/active/active.component';
+import {PermissionComponent} from '../../../shared/components/user-list-table/permission/permission.component';
 
 @Component({
     selector: 'app-user-list',
@@ -41,6 +42,7 @@ export class UserListComponent {
         {
             key: "permission",
             title: "Permissão",
+            component: PermissionComponent
         },
         {
             key: "active",
